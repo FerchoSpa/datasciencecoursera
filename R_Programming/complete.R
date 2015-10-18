@@ -12,11 +12,6 @@ complete <- function(directory, id = 1:332) {
   ## ...
   ## where 'id' is the monitor ID number and 'nobs' is the
   ## number of complete cases
-  #good<-complete.cases(d)
-  #sum(as.integer(good))
-  #ns<-append(ns, 4)
-  #obss<-append(obss, 4)
-  #df<-data.frame(foo=ns, bar=obss)
   
   ids <- integer()
   nobs <- integer()
