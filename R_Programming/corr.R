@@ -16,24 +16,20 @@ corr <- function(directory, threshold = 0) {
   for (i in 1:nrow(completeInfo)) {
     if (completeInfo$nobs[i]>threshold) {
       csvAboveThreshold <- append(csvAboveThreshold, i)
-      print(completeInfo$nobs[i])
     }
   }
-  print(csvAboveThreshold)
-  
+
   correlationVector <- vector()
   
   # Go over all the CSV that have right level of complete cases
-  for (i in 1:nrow(csvAboveThreshold)) {
-    filename = paste0(directory, "/", sprintf("%03d", i), ".csv")
+  for (i in 1:length(csvAboveThreshold)) {
+    idx<-csvAboveThreshold[i]
+    filename = paste0(directory, "/", sprintf("%03d", idx), ".csv")
     d <- read.csv(filename)
     good<-complete.cases(d)
-    dataComplete <- d[good]
-    sulfateData <- d$sulfate[good]
-    notNaIndeces <- !is.na(dataOfInteres)
     sulfateData <- d$sulfate[good]
     nitrateData <- d$nitrate[good]
-    correlationVector <- cor(sulfateData, nitrateData)
+    correlationVector <- append(correlationVector, cor(sulfateData, nitrateData))
   }
   correlationVector
 }
